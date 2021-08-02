@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Homework12
 {
-    public enum Positions
+    public class ClassManager
     {
-        Staff,
-        Intern,
-        Manager,
+        public static Department GetCompany(ILoader loader)
+        {
+            return loader.Get();
+        }
     }
 }

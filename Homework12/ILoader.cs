@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Homework12
 {
-    public enum Positions
+    public interface ILoader
     {
-        Staff,
-        Intern,
-        Manager,
+        public Department Get();
     }
 }

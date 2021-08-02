@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework_12
+namespace Homework12
 {
     public class Department
     {
@@ -27,6 +27,10 @@ namespace Homework_12
         public void AddDepartment(Department department)
         {
             SubDepartments.Add(department);
+        } 
+        public void AddDepartment(string name)
+        {
+            SubDepartments.Add(new Department(name));
         }
         public void UpdateManager()
         {

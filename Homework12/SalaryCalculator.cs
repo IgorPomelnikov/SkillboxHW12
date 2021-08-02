@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework_12
+namespace Homework12
 {
     public class SalaryCalculator
     {
@@ -15,7 +15,6 @@ namespace Homework_12
                 case Positions.Staff: return 1000;
                 case Positions.Intern: return 1000;
                 case Positions.Manager: return CalculateManagerSalary(department);
-                case Positions.Boss: return 5000;
                 default: return 0;
             }
         }
