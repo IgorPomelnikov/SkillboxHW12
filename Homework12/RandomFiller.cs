@@ -43,6 +43,8 @@ namespace Homework12
         }
         private static void CreateFirstDepatmentLayer(Department company, int countOfDeps)
         {
+            company.AddDepartment("Fired");
+            
             for (int i = 1; i < countOfDeps + 1; i++)
             {
                 CreateDepartment(company, i);
