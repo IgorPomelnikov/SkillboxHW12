@@ -20,9 +20,13 @@ namespace Homework12
     /// </summary>
     public partial class MainWindow : Window
     {
+        Company company;
         public MainWindow()
         {
             InitializeComponent();
+            company = ClassManager.GetCompany(new RandomFiller());
+            treeView.ItemsSource = company.Department.SubDepartments;
+
         }
     }
 }

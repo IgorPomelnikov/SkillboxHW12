@@ -114,7 +114,7 @@ namespace Homework12
             {
                 department.Workers[random.Next(department.Workers.Count)].MoveToManager(department);
             }
-            else if(department.Workers is not null) department.Workers[0].MoveToManager(department);
+            //else if(department.Workers is not null) department.Workers[0].MoveToManager(department);
 
         }
 

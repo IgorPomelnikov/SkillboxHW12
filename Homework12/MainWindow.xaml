@@ -8,24 +8,40 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"></ColumnDefinition>
-            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="150"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TreeView Grid.Column="0" Grid.Row="0"></TreeView>
-        <TextBox Grid.Column="0" Grid.Row="1"></TextBox>
-        <Button Grid.Column="0" Grid.Row="2" Height="30" VerticalAlignment="Top"></Button>
-        <ListView x:Name="lwWorkers" Grid.Column="1" Grid.RowSpan="3">
-            <ListView.View>
-                <GridView>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        
+        <StackPanel>
+            
+            <TreeView x:Name="treeView" 
+                      Height="100"
+                      Margin="0,10,0,10">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Company.Department.SubDepartments}">
+                        <TextBlock Text="{Binding Name}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+                
+            </TreeView>
+            <TextBox x:Name="TB" 
+                     Height="30" 
+                     Margin="0,10,0,10">
+                
+            </TextBox>
+            <Button x:Name="SaveBtn" 
+                    Content="SAVE"  
+                    Margin="0,10,0,10">
 
-    </Grid>
+            </Button>
+        </StackPanel>
+        <ListView x:Name="LB"  Grid.Column="1">
+            <GridView>
+                <GridViewColumn Header="Name"/>
+                <GridViewColumn Header="Age"/>
+                <GridViewColumn Header="Position"/>
+                <GridViewColumn Header="Salary"/>
+            </GridView>
+            
+        </ListView>
+    </Grid> 
 </Window>
