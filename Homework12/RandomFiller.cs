@@ -10,7 +10,7 @@ namespace Homework12
     {
         static Random random = new Random();
 
-        public Department Get()
+        public Company Get()
         {
             return Generate();
         }
@@ -19,41 +19,41 @@ namespace Homework12
         /// Generates a company with departments and workers
         /// </summary>
         /// <returns>Department with data</returns>
-        private static Department Generate()
+        private static Company Generate()
         {
-            Department company = new Department("Company");
+            Department baseDepartment = new Department("Company");
 
             int countOfDeps = random.Next(1, 11);
             int avaliableDepth = random.Next(10);
             int maxWorkers = random.Next(1, 501);
 
-            CreateFirstDepatmentLayer(company, countOfDeps); //Creating first layer of deparment, basic strucure
-            CreateDeepDepStucture(company, avaliableDepth); //Expanding sructure in random deep in each department
-            FillWorkers(company.SubDepartments, maxWorkers); //Filling up all departpments with random count of workers
-            AppointManagers(company); //Appoint random worker as manager of department
+            CreateFirstDepatmentLayer(baseDepartment, countOfDeps); //Creating first layer of deparment, basic strucure
+            CreateDeepDepStucture(baseDepartment, avaliableDepth); //Expanding sructure in random deep in each department
+            FillWorkers(baseDepartment.SubDepartments, maxWorkers); //Filling up all departpments with random count of workers
+            AppointManagers(baseDepartment); //Appoint random worker as manager of department
 
-            return company;
+            return new Company(baseDepartment);
         } 
-        private static void CreateDeepDepStucture(Department company, int avaliableDepth)
+        private static void CreateDeepDepStucture(Department department, int avaliableDepth)
         {
-            foreach (var dep in company.SubDepartments)
+            foreach (var dep in department.SubDepartments)
             {
                 CreateDepartment(random.Next(1, avaliableDepth), 1, dep);
             }
         }
-        private static void CreateFirstDepatmentLayer(Department company, int countOfDeps)
+        private static void CreateFirstDepatmentLayer(Department department, int countOfDeps)
         {
-            company.AddDepartment("Fired");
+            department.AddDepartment("Fired");
             
             for (int i = 1; i < countOfDeps + 1; i++)
             {
-                CreateDepartment(company, i);
+                CreateDepartment(department, i);
             }
         }
-        private static Department CreateDepartment(Department dep, int i)
+        private static Department CreateDepartment(Department department, int i)
         {
-            dep.AddDepartment($"Department_{i}");
-            return dep.SubDepartments[i - 1];
+            department.AddDepartment($"Department_{i}");
+            return department.SubDepartments[i - 1];
         }
         private static Department CreateDepartment(int stop, int depth, Department dep)
         {
@@ -76,7 +76,7 @@ namespace Homework12
         }
         private static void FillWorkers(List<Department> departments, int maxWorkers)
         {
-            foreach (var d in departments)
+            foreach (var department in departments)
             {
                 int countOfWorkers = random.Next(maxWorkers + 1);
 
@@ -84,37 +84,37 @@ namespace Homework12
                 {
                     switch (random.Next(2))
                     {
-                        case 0: d.AddWorker(AddIntern(d, i)); break;
-                        case 1: d.AddWorker(AddStuff(d, i)); break;
+                        case 0: department.AddWorker(AddIntern(department, i)); break;
+                        case 1: department.AddWorker(AddStuff(department, i)); break;
                         default:
                             break;
                     }
                 }
-                FillWorkers(d.SubDepartments, maxWorkers);
+                FillWorkers(department.SubDepartments, maxWorkers);
             }
         }
-        private static Worker AddIntern(Department dep, int i)
+        private static Worker AddIntern(Department department, int i)
         {
-            return new Worker($"Dep.{dep.Id}_Worker_{i}", Positions.Intern, dep);
+            return new Worker($"Dep.{department.Id}_Worker_{i}", Positions.Intern, department);
         }
-        private static Worker AddStuff(Department dep, int i)
+        private static Worker AddStuff(Department department, int i)
         {
-            return new Worker($"Dep.{dep.Id}_Worker_{i}", Positions.Staff, dep);
+            return new Worker($"Dep.{department.Id}_Worker_{i}", Positions.Staff, department);
         }
         private static void AppointManagers(Department department)
         {
-            if (department.SubDepartments != null)
+            if (department.SubDepartments is not null)
             {
                 foreach (var dep in department.SubDepartments)
                 {
                     AppointManagers(dep);
                 }
             }
-            if (department.Workers != null && department.Workers.Count > 0)
+            if (department.Workers is not null && department.Workers.Count > 0)
             {
                 department.Workers[random.Next(department.Workers.Count)].MoveToManager(department);
             }
-            else if(department.Workers != null) department.Workers[0].MoveToManager(department);
+            else if(department.Workers is not null) department.Workers[0].MoveToManager(department);
 
         }
 

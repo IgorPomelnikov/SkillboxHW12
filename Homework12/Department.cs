@@ -32,6 +32,10 @@ namespace Homework12
         {
             SubDepartments.Add(new Department(name));
         }
+        /// <summary>
+        /// Prepares collection of workers for appointment a new manager.
+        /// It downgrades currient manager to staff worker.
+        /// </summary>
         public void UpdateManager()
         {
             foreach (var worker in Workers)

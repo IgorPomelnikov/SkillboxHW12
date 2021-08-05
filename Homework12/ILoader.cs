@@ -8,6 +8,6 @@ namespace Homework12
 {
     public interface ILoader
     {
-        public Department Get();
+        public Company Get();
     }
 }

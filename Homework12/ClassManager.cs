@@ -8,7 +8,7 @@ namespace Homework12
 {
     public class ClassManager
     {
-        public static Department GetCompany(ILoader loader)
+        public static Company GetCompany(ILoader loader)
         {
             return loader.Get();
         }
